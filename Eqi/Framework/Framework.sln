@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core", "Eqi.Core\Eqi.Core.csproj", "{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core.WebCentral", "Eqi.Core.WebCentral\Eqi.Core.WebCentral.csproj", "{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core.BaseService", "Eqi.Core.BaseService\Eqi.Core.BaseService.csproj", "{71B91912-D7F0-46F0-8384-E959694C157C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B91912-D7F0-46F0-8384-E959694C157C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B91912-D7F0-46F0-8384-E959694C157C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B91912-D7F0-46F0-8384-E959694C157C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B91912-D7F0-46F0-8384-E959694C157C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

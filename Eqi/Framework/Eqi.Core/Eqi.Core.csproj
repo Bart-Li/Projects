@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC7A765F-FE13-4065-9603-E9D4FCAF0C4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Eqi.Core</RootNamespace>
+    <AssemblyName>Eqi.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\IConfigAccessor.cs" />
+    <Compile Include="Configuration\IConfigFileDefinition.cs" />
+    <Compile Include="Configuration\IConfigRepository.cs" />
+    <Compile Include="Configuration\IConfigurationManager.cs" />
+    <Compile Include="Configuration\Impl\ConfigFileDefinition.cs" />
+    <Compile Include="Configuration\Impl\DefaultConfigAccessor.cs" />
+    <Compile Include="Configuration\Impl\DefaultConfigRepository.cs" />
+    <Compile Include="Configuration\Option\ConfigFileAttribute .cs" />
+    <Compile Include="Configuration\Option\ConfigurationFileConfig.cs" />
+    <Compile Include="Configuration\Impl\DefaultConfigurationManager.cs" />
+    <Compile Include="Configuration\Option\FileFormat.cs" />
+    <Compile Include="DI\IAutofacServicesRegistor.cs" />
+    <Compile Include="DI\Impl\DefaultAutofacServicesRegistor.cs" />
+    <Compile Include="DI\Impl\DefaultServiceCollection.cs" />
+    <Compile Include="DI\Impl\DefaultServiceDefinitionCollection.cs" />
+    <Compile Include="DI\Impl\DependencyServiceAttribute.cs" />
+    <Compile Include="DI\Impl\DependencyServiceRepository.cs" />
+    <Compile Include="DI\Impl\ServiceDefinition.cs" />
+    <Compile Include="DI\Impl\ServiceDefinitionCollectionExtension.cs" />
+    <Compile Include="DI\Impl\ServiceLifeTime.cs" />
+    <Compile Include="DI\IServiceCollection.cs" />
+    <Compile Include="DI\IServiceDefinition.cs" />
+    <Compile Include="DI\IServiceDefinitionCollection.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="LibraryContainer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\AssemblyLoader.cs" />
+    <Compile Include="Reflection\AssemblyTypeLoader.cs" />
+    <Compile Include="Reflection\ICurrentAppDomain.cs" />
+    <Compile Include="Reflection\Impl\DefaultCurrentAppDomain.cs" />
+    <Compile Include="Serializer\ISerializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Serializer\Impl\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
