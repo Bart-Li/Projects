@@ -1,4 +1,5 @@
 ﻿using System;
+using Eqi.Core.Configuration.Impl;
 
 namespace Eqi.Core.Configuration
 {
@@ -11,7 +12,7 @@ namespace Eqi.Core.Configuration
         /// <summary>
         /// The options.
         /// </summary>
-        private ConfigurationFile configFile;
+        private ConfigFileDefinition configFile;
 
         /// <summary>
         /// Initializes a new instance of the ConfigFileAttribute class.
@@ -19,7 +20,7 @@ namespace Eqi.Core.Configuration
         /// <param name="filePath">File path.</param>
         public ConfigFileAttribute(string filePath)
         {
-            this.configFile = new ConfigurationFile();
+            this.configFile = new ConfigFileDefinition();
             this.configFile.FilePath = filePath;
         }
 
@@ -48,8 +49,8 @@ namespace Eqi.Core.Configuration
         /// <value>The format.</value>
         public FileFormat Format
         {
-            get { return this.configFile.Format.ToEnum<FileFormat>(FileFormat.Xml); }
-            set { this.configFile.Format = value.ToString(); }
+            get { return this.configFile.Format; }
+            set { this.configFile.Format = value; }
         }
     }
 }

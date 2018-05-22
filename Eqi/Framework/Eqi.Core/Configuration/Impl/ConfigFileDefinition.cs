@@ -10,6 +10,8 @@ namespace Eqi.Core.Configuration.Impl
         /// </summary>
         private string name;
 
+        private FileFormat format = FileFormat.Xml;
+
         /// <summary>
         /// Gets the name.
         /// The name for matching ConfigFileAttribute["Name"].
@@ -39,7 +41,18 @@ namespace Eqi.Core.Configuration.Impl
 
         public string FilePath { get; set; }
 
-        public FileFormat Format { get; set; }
+        public FileFormat Format
+        {
+            get
+            {
+                return format;
+            }
+            
+            set
+            {
+                this.format = value;
+            }
+        }
 
         /// <summary>
         /// Returns a string that represents the current ConfigurationFile.

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 using Eqi.Core.Reflection;
+using Eqi.Core.Serialization;
 
 namespace Eqi.Core.Configuration.Impl
 {
@@ -10,16 +10,19 @@ namespace Eqi.Core.Configuration.Impl
     public class DefaultConfigRepository : IConfigRepository
     {
         private readonly ICurrentAppDomain _currentAppDomain;
-        public DefaultConfigRepository(ICurrentAppDomain currentAppDomain)
+        private readonly ISerializer _serializer;
+
+        public DefaultConfigRepository(ICurrentAppDomain currentAppDomain, ISerializer serializer)
         {
             this._currentAppDomain = currentAppDomain;
+            this._serializer = serializer;
         }
 
         /// <summary>
-        /// Get config files.
+        /// Get all config file definition.
         /// </summary>
-        /// <returns>All config files.</returns>
-        public IList<IConfigFileDefinition> GetConfigFiles()
+        /// <returns>All config file definition.</returns>
+        public IList<IConfigFileDefinition> GetAllConfigFileDefinition()
         {
             var list = new List<IConfigFileDefinition>();
             var systemFileConfig = this.GetSystemFileConfig();
@@ -40,13 +43,13 @@ namespace Eqi.Core.Configuration.Impl
         }
 
         /// <summary>
-        /// Get config file by key.
+        /// Get config file definition by key.
         /// </summary>
         /// <param name="configName">Config name.</param>
-        /// <returns>Config file.</returns>
-        public IConfigFileDefinition GetConfigFileByName(string configName)
+        /// <returns>Config file definition.</returns>
+        public IConfigFileDefinition GetConfigFileDefinitionByName(string configName)
         {
-            var allConfigFiles = this.GetConfigFiles();
+            var allConfigFiles = this.GetAllConfigFileDefinition();
             if (!allConfigFiles.IsNullOrEmpty())
             {
                 return allConfigFiles.Find(file => file.Name.Equals(configName, StringComparison.OrdinalIgnoreCase));
@@ -55,27 +58,25 @@ namespace Eqi.Core.Configuration.Impl
             return null;
         }
 
+        /// <summary>
+        /// Get config file definition by attribute.
+        /// </summary>
+        /// <param name="attribute">Config file Attribute.</param>
+        /// <returns>Config file definition.</returns>
+        public IConfigFileDefinition GetConfigFileDefinitionByAttribute(ConfigFileAttribute attribute)
+        {
+            var configDefinition = new ConfigFileDefinition();
+            configDefinition.Name = attribute.Name;
+            configDefinition.FilePath = attribute.FilePath;
+            configDefinition.Format = attribute.Format;
+
+            return configDefinition;
+        }
+
         private ConfigurationFileConfig GetSystemFileConfig()
         {
             var filePath = Path.Combine(this._currentAppDomain.BaseDirectory, "Configuration/ConfigFiles.config");
-
-            FileStream stream = null;
-            ConfigurationFileConfig configurationFileConfig = null;
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(ConfigurationFileConfig));
-                stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                configurationFileConfig = (ConfigurationFileConfig)serializer.Deserialize(stream);
-            }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                }
-            }
-
-            return configurationFileConfig;
+            return this._serializer.DeserializeXmlFromFile<ConfigurationFileConfig>(filePath);
         }
     }
 }

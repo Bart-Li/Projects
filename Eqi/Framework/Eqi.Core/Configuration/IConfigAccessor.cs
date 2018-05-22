@@ -2,6 +2,6 @@
 {
     public interface IConfigAccessor
     {
-        T GetConfigValue<T>(ConfigurationFile configFile) where T : class;
+        T GetConfigValue<T>(IConfigFileDefinition configFile) where T : class;
     }
 }

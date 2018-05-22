@@ -5,16 +5,23 @@ namespace Eqi.Core.Configuration
     public interface IConfigRepository
     {
         /// <summary>
-        /// Get config files.
+        /// Get all config file definition.
         /// </summary>
-        /// <returns>All config files.</returns>
-        IList<IConfigFileDefinition> GetConfigFiles();
+        /// <returns>All config file definition.</returns>
+        IList<IConfigFileDefinition> GetAllConfigFileDefinition();
 
         /// <summary>
-        /// Get config file by key.
+        /// Get config file definition by key.
         /// </summary>
         /// <param name="configName">Config name.</param>
-        /// <returns>Config file.</returns>
-        IConfigFileDefinition GetConfigFileByName(string configName);
+        /// <returns>Config file definition.</returns>
+        IConfigFileDefinition GetConfigFileDefinitionByName(string configName);
+
+        /// <summary>
+        /// Get config file definition by attribute.
+        /// </summary>
+        /// <param name="attribute">Config file Attribute.</param>
+        /// <returns>Config file definition.</returns>
+        IConfigFileDefinition GetConfigFileDefinitionByAttribute(ConfigFileAttribute attribute);
     }
 }
