@@ -42,16 +42,22 @@ namespace Eqi.Core.Configuration.Impl
             return configValue;
         }
 
-        private T GetConfigValueByPath<T>(IConfigFileDefinition configFileDefinition)
+        private T GetConfigValueByPath<T>(IConfigFileDefinition definition)
         {
-            if (configFileDefinition == null || string.IsNullOrWhiteSpace(configFileDefinition.FilePath))
+            if (definition == null || string.IsNullOrWhiteSpace(definition.FilePath))
             {
                 return default(T);
             }
 
-
-
-            return default(T);
+            switch (definition.Format)
+            {
+                case FileFormat.Json:
+                    return this._serializer.DeserializeJsonFromFile<T>(definition.FilePath);
+                case FileFormat.Xml:
+                    return this._serializer.DeserializeXmlFromFile<T>(definition.FilePath);
+                default:
+                    return (T)((object)this._serializer.DeserializeTextFromFile(definition.FilePath));
+            }
         }
 
         /// <summary>

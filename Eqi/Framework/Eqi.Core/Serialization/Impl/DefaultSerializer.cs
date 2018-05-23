@@ -53,15 +53,8 @@ namespace Eqi.Core.Serialization.Impl
         /// <returns>Object intance.</returns>
         public T DeserializeJsonFromFile<T>(string filePath)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-                using (TextReader reader = new StreamReader(stream))
-                {
-                    stream.Position = 0L;
-                    return JsonConvert.DeserializeObject<T>(reader.ReadToEnd());
-                }
-            }
+            var text = DeserializeTextFromFile(filePath);
+            return JsonConvert.DeserializeObject<T>(text);
         }
 
         #endregion
@@ -127,8 +120,8 @@ namespace Eqi.Core.Serialization.Impl
             var serializer = new XmlSerializer(typeof(T));
             using (var reader = new StreamReader(stream))
             {
-                reader.ReadToEnd();
                 stream.Position = 0;
+                reader.ReadToEnd();                
                 return (T)serializer.Deserialize(reader);
             }
         }
@@ -144,7 +137,24 @@ namespace Eqi.Core.Serialization.Impl
             var serializer = new XmlSerializer(typeof(T));
             using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                return DeserializeXmlStreamToObject<T>(stream);
+                return (T)serializer.Deserialize(stream);
+            }
+        }
+
+        /// <summary>
+        /// Deserialize text data from file.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <returns>File text.</returns>
+        public string DeserializeTextFromFile(string filePath)
+        {
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using (TextReader reader = new StreamReader(stream))
+                {
+                    stream.Position = 0L;
+                    return reader.ReadToEnd();
+                }
             }
         }
 

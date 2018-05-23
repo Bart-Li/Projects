@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Eqi.Core.Reflection;
 using Eqi.Core.Serialization;
+using Eqi.Core;
 
 namespace Eqi.Core.Configuration.Impl
 {
@@ -19,6 +20,16 @@ namespace Eqi.Core.Configuration.Impl
         }
 
         /// <summary>
+        /// Get default system config directory.
+        /// </summary>
+        public string DefaultConfigDirectory
+        {
+            get {
+                return Path.Combine(this._currentAppDomain.BaseDirectory, "Configuration");
+            }
+        }
+
+        /// <summary>
         /// Get all config file definition.
         /// </summary>
         /// <returns>All config file definition.</returns>
@@ -26,15 +37,15 @@ namespace Eqi.Core.Configuration.Impl
         {
             var list = new List<IConfigFileDefinition>();
             var systemFileConfig = this.GetSystemFileConfig();
-            if (systemFileConfig != null && systemFileConfig.ConfigurationFiles != null)
+            if (systemFileConfig != null && systemFileConfig.ConfigFiles != null)
             {
-                systemFileConfig.ConfigurationFiles.ForEach(file =>
+                systemFileConfig.ConfigFiles.ForEach(file =>
                 {
                     list.Add(new ConfigFileDefinition
                     {
                         Name = file.Name,
-                        FilePath = file.FilePath,
-                        Format = (FileFormat)Enum.Parse(typeof(FileFormat), file.Format)
+                        FilePath = this.BuildConfigFilePath(file.FilePath),
+                        Format = file.Format.ToEnum<FileFormat>()
                     });
                 });
             }
@@ -67,15 +78,48 @@ namespace Eqi.Core.Configuration.Impl
         {
             var configDefinition = new ConfigFileDefinition();
             configDefinition.Name = attribute.Name;
-            configDefinition.FilePath = attribute.FilePath;
+            configDefinition.FilePath = this.BuildConfigFilePath(attribute.FilePath);
             configDefinition.Format = attribute.Format;
 
             return configDefinition;
         }
 
+        /// <summary>
+        /// Get config file definition by file path.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <returns>Config file definition.</returns>
+        public IConfigFileDefinition GetConfigFileDefinitionByFilePath(string filePath)
+        {
+            var configDefinition = new ConfigFileDefinition();
+            configDefinition.FilePath = this.BuildConfigFilePath(filePath);
+
+            return configDefinition;
+        }
+
+        /// <summary>
+        /// Build config file path.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <returns>Config file path.</returns>
+        private string BuildConfigFilePath(string filePath)
+        {
+            string pathRoot = Path.GetPathRoot(filePath);
+            if (pathRoot == null || pathRoot.Trim().Length <= 0)
+            {
+                return Path.Combine(DefaultConfigDirectory, filePath);
+            }
+
+            return filePath;
+        }
+
+        /// <summary>
+        /// Get system config files.
+        /// </summary>
+        /// <returns></returns>
         private ConfigurationFileConfig GetSystemFileConfig()
         {
-            var filePath = Path.Combine(this._currentAppDomain.BaseDirectory, "Configuration/ConfigFiles.config");
+            var filePath = this.BuildConfigFilePath("ConfigFiles.config");
             return this._serializer.DeserializeXmlFromFile<ConfigurationFileConfig>(filePath);
         }
     }

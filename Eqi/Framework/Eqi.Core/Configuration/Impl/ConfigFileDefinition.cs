@@ -10,7 +10,7 @@ namespace Eqi.Core.Configuration.Impl
         /// </summary>
         private string name;
 
-        private FileFormat format = FileFormat.Xml;
+        private FileFormat format = FileFormat.None;
 
         /// <summary>
         /// Gets the name.
@@ -29,6 +29,7 @@ namespace Eqi.Core.Configuration.Impl
                 var paths = FilePath
                     .Replace("\\", "@")
                     .Replace(@"\", "@")
+                    .Replace("/", "@")
                     .Split(new string[] { "@" }, StringSplitOptions.RemoveEmptyEntries);
 
                 return paths[paths.Length - 1].Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[0];
@@ -45,9 +46,35 @@ namespace Eqi.Core.Configuration.Impl
         {
             get
             {
-                return format;
+                if (this.format != FileFormat.None)
+                {
+                    return this.format;
+                }
+
+                if (FilePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.format = FileFormat.Xml;
+                }
+                else if (FilePath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.format = FileFormat.Json;
+                }
+                else if (FilePath.EndsWith(".txt", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.format = FileFormat.Text;
+                }
+                else if (FilePath.EndsWith(".ini", StringComparison.OrdinalIgnoreCase))
+                {
+                    this.format = FileFormat.Ini;
+                }
+                else
+                {
+                    this.format = FileFormat.Xml;
+                }
+
+                return this.format;
             }
-            
+
             set
             {
                 this.format = value;

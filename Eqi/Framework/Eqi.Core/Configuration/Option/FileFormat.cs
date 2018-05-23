@@ -6,23 +6,28 @@
     public enum FileFormat
     {
         /// <summary>
+        /// Invalid format.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// The xml.
         /// </summary>
-        Xml,
+        Xml = 1,
 
         /// <summary>
         /// The json.
         /// </summary>
-        Json,
+        Json = 2,
 
         /// <summary>
         /// The ini.
         /// </summary>
-        Ini,
+        Ini = 3,
 
         /// <summary>
         /// The text.
         /// </summary>
-        Text
+        Text = 4
     }
 }

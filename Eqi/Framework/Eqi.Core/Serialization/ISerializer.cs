@@ -78,6 +78,13 @@ namespace Eqi.Core.Serialization
         /// <returns>Object intance.</returns>
         T DeserializeXmlFromFile<T>(string filePath);
 
+        /// <summary>
+        /// Deserialize text data from file.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <returns>File text.</returns>
+        string DeserializeTextFromFile(string filePath);
+
         #endregion
     }
 }
