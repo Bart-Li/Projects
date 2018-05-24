@@ -63,10 +63,6 @@ namespace Eqi.Core.Configuration.Impl
                 {
                     this.format = FileFormat.Text;
                 }
-                else if (FilePath.EndsWith(".ini", StringComparison.OrdinalIgnoreCase))
-                {
-                    this.format = FileFormat.Ini;
-                }
                 else
                 {
                     this.format = FileFormat.Xml;

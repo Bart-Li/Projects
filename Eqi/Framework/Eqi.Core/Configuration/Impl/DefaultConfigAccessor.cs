@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Eqi.Core.IO;
 using Eqi.Core.Serialization;
 
 namespace Eqi.Core.Configuration.Impl
@@ -10,12 +7,18 @@ namespace Eqi.Core.Configuration.Impl
     [DependencyInjection(typeof(IConfigAccessor))]
     public class DefaultConfigAccessor : IConfigAccessor
     {
+        private readonly IFileWatcher _fileWatcher;
+        private readonly IConfigRepository _configRepository;
         private readonly ISerializer _serializer;
         private static readonly IDictionary<string, object> ConfigCollection = new Dictionary<string, object>();
 
-        public DefaultConfigAccessor(ISerializer serializer)
+        public DefaultConfigAccessor(IFileWatcher fileWatcher, IConfigRepository configRepository, ISerializer serializer)
         {
+            this._fileWatcher = fileWatcher;
+            this._configRepository = configRepository;
             this._serializer = serializer;
+
+            this._fileWatcher.WatchDataChange(this._configRepository.DefaultConfigDirectory, ()=> ConfigCollection.Clear());
         }
 
         /// <summary>

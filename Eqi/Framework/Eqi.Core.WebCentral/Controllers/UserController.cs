@@ -29,8 +29,8 @@ namespace Eqi.Core.WebCentral.Controllers
         [HttpGet]
         public object Get()
         {
-            var filePath = Path.Combine(this.domain.BaseDirectory, "Configuration/test.json");
-            var configFile = configManager.GetConfiguration<Test>(filePath);
+            var filePath = Path.Combine(this.domain.BaseDirectory, "Configuration/test2.txt");
+            var configFile = configManager.GetConfiguration<string>(filePath);
 
             //var testClass = new Test { Name = "BartLi", Age = 23 };
             //var xml = serializer.SerializeToXml<Test>(testClass);

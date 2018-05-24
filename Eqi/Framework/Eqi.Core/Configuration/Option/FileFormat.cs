@@ -21,13 +21,8 @@
         Json = 2,
 
         /// <summary>
-        /// The ini.
-        /// </summary>
-        Ini = 3,
-
-        /// <summary>
         /// The text.
         /// </summary>
-        Text = 4
+        Text = 3
     }
 }
