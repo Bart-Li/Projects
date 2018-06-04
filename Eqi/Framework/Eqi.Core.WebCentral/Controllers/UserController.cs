@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Xml.Serialization;
 using Eqi.Core;
 using Eqi.Core.Configuration;
+using Eqi.Core.DataAccess;
 using Eqi.Core.Reflection;
 using Eqi.Core.Serialization;
 
@@ -29,21 +30,7 @@ namespace Eqi.Core.WebCentral.Controllers
         [HttpGet]
         public object Get()
         {
-            var filePath = Path.Combine(this.domain.BaseDirectory, "Configuration/test2.txt");
-            var configFile = configManager.GetConfiguration<string>(filePath);
-
-            //var testClass = new Test { Name = "BartLi", Age = 23 };
-            //var xml = serializer.SerializeToXml<Test>(testClass);
-            //var configFile = serializer.DeserializeTextFromFile(filePath);
-            //var configFile2 = serializer.DeserializeXmlFromFile<ConfigurationFileConfig>(filePath);
-            return configFile;
-        }
-
-        public class Test
-        {
-            public string Name { get; set; }
-
-            public int Age { get; set; }
+            return "test";
         }
     }
 }

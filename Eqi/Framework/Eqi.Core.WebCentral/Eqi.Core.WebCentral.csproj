@@ -98,9 +98,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\test.json" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Eqi.Core\Eqi.Core.csproj">
       <Project>{bc7a765f-fe13-4065-9603-e9d4fcaf0c4a}</Project>
       <Name>Eqi.Core</Name>
@@ -110,14 +107,13 @@
     <Content Include="Configuration\ConfigFiles.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\test2.txt" />
+    <Content Include="Configuration\Data\DataCommandFiles.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Configuration\Data\Databases.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Data\DataCommand.config" />
+    <Content Include="Configuration\Data\DataCommands.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

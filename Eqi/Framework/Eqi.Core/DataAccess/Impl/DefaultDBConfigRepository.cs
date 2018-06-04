@@ -30,23 +30,22 @@ namespace Eqi.Core.DataAccess.Impl
         public DataCommandUnit GetDataCommand(string dataCommandName)
         {
             DataCommandUnit result = null;
-            //var dataCommandList = this.GetDataCommandConfigList();
-            //if (!dataCommandList.IsNullOrEmpty())
-            //{
-            //    var systemName = this.GetSystemName();
-            //    foreach (var dataCommand in dataCommandList)
-            //    {
-            //        var dataCommandConfig = this._configManager.GetConfigFromService<DataCommandsConfig>(dataCommand, systemName, NodeDataType.Xml);
-            //        if (dataCommandConfig != null && !dataCommandConfig.DataCommandCollection.IsNullOrEmpty())
-            //        {
-            //            result = dataCommandConfig.DataCommandCollection.Find(command => command.Name.Equals(dataCommandName, StringComparison.OrdinalIgnoreCase));
-            //            if (result != null)
-            //            {
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
+            var dataCommandList = this.GetDataCommandConfigList();
+            if (!dataCommandList.IsNullOrEmpty())
+            {
+                foreach (var dataCommand in dataCommandList)
+                {
+                    var dataCommandConfig = this._configManager.GetConfiguration<DataCommandsConfig>("Data/" + dataCommand);
+                    if (dataCommandConfig != null && !dataCommandConfig.DataCommandCollection.IsNullOrEmpty())
+                    {
+                        result = dataCommandConfig.DataCommandCollection.Find(command => command.Name.Equals(dataCommandName, StringComparison.OrdinalIgnoreCase));
+                        if (result != null)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
 
             return result;
         }
@@ -65,55 +64,31 @@ namespace Eqi.Core.DataAccess.Impl
                 return null;
             }
 
-            //var dataBasesConfig = this._configManager.GetConfigFromService<DataBasesConfig>(this.GetDatabaseConfigName(), this.GetSystemName(), NodeDataType.Xml);
-            //if (dataBasesConfig != null && !dataBasesConfig.DatabaseGroups.IsNullOrEmpty())
-            //{
-            //    IList<DataBaseUnit> databaseUnits = dataBasesConfig.DatabaseGroups.SelectMany(group => group.DatabaseCollection).ToList();
-            //    if (databaseUnits != null && databaseUnits.Any())
-            //    {
-            //        result = databaseUnits.FirstOrDefault(database => database.Name.Equals(databaseName, StringComparison.OrdinalIgnoreCase));
-            //    }
-            //}
+            var dataBasesConfig = this._configManager.GetConfiguration<DataBasesConfig>();
+            if (dataBasesConfig != null && !dataBasesConfig.DatabaseGroups.IsNullOrEmpty())
+            {
+                IList<DataBaseUnit> databaseUnits = dataBasesConfig.DatabaseGroups.SelectMany(group => group.DatabaseCollection).ToList();
+                if (databaseUnits != null && databaseUnits.Any())
+                {
+                    result = databaseUnits.FirstOrDefault(database => database.Name.Equals(databaseName, StringComparison.OrdinalIgnoreCase));
+                }
+            }
 
             return result;
-        }
-
-        private string GetSystemName()
-        {
-            var systemName = string.Empty;
-            //var dataAccessConfig = this._configManager.GetSection<DataAccessConfig>("DataAccessConfig");
-            //if (dataAccessConfig != null && !string.IsNullOrWhiteSpace(dataAccessConfig.SystemName))
-            //{
-            //    systemName = dataAccessConfig.SystemName;
-            //}
-
-            return systemName;
-        }
-
-        private string GetDatabaseConfigName()
-        {
-            var databaseConfigName = "Databases";
-            //var dataAccessConfig = this._configManager.GetSection<DataAccessConfig>("DataAccessConfig");
-            //if (dataAccessConfig != null && !string.IsNullOrWhiteSpace(dataAccessConfig.DatabaseConfig))
-            //{
-            //    databaseConfigName = dataAccessConfig.DatabaseConfig;
-            //}
-
-            return databaseConfigName;
         }
 
         private List<string> GetDataCommandConfigList()
         {
             var dataCommandList = new List<string>();
-            //var dataAccessConfig = this._configManager.GetSection<DataAccessConfig>("DataAccessConfig");
-            //if (dataAccessConfig != null && !dataAccessConfig.DataCommandConfig.IsNullOrEmpty())
-            //{
-            //    dataCommandList = dataAccessConfig.DataCommandConfig;
-            //}
-            //else
-            //{
-            //    dataCommandList.Add("DataCommands");
-            //}
+            var dataAccessConfig = this._configManager.GetConfiguration<DataCommandFilesConfig>();
+            if (dataAccessConfig != null && !dataAccessConfig.DataCommandFiles.IsNullOrEmpty())
+            {
+                dataCommandList = dataAccessConfig.DataCommandFiles.Select(n => n.Name).ToList();
+            }
+            else
+            {
+                dataCommandList.Add("DataCommands.config");
+            }
 
             return dataCommandList;
         }

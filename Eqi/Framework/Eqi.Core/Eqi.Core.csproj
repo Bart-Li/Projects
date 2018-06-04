@@ -61,10 +61,10 @@
     <Compile Include="Configuration\Option\ConfigurationFileConfig.cs" />
     <Compile Include="Configuration\Impl\DefaultConfigurationManager.cs" />
     <Compile Include="Configuration\Option\FileFormat.cs" />
-    <Compile Include="DataAccess\Config\DataAccessConfig.cs" />
     <Compile Include="DataAccess\Config\DataBaseGroup.cs" />
     <Compile Include="DataAccess\Config\DataBasesConfig.cs" />
     <Compile Include="DataAccess\Config\DataBaseUnit.cs" />
+    <Compile Include="DataAccess\Config\DataCommandFilesConfig.cs" />
     <Compile Include="DataAccess\Config\DataCommandParameterCollection.cs" />
     <Compile Include="DataAccess\Config\DataCommandsConfig.cs" />
     <Compile Include="DataAccess\Config\DataCommandUnit.cs" />
