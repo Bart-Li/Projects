@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -66,28 +67,17 @@ namespace Eqi.Core.Serialization.Impl
         /// </summary>
         /// <param name="value">object instance.</param>
         /// <returns>Xml string.</returns>
-        public string SerializeToXml<T>(T value)
+        public string SerializeToXml(object value)
         {
             using (var memory = new MemoryStream())
             {
-                using (TextReader reader = new StreamReader(memory))
+                using (TextReader reader = new StreamReader(memory, Encoding.UTF8))
                 {
                     SerializeToXmlStream(value, memory);
                     memory.Position = 0L;
                     return reader.ReadToEnd();
                 }
             }
-        }
-
-        /// <summary>
-        /// Serialize object to XML.
-        /// </summary>
-        /// <param name="value">Object instance.</param>
-        /// <param name="stream">Object stream.</param>
-        public void SerializeToXmlStream<T>(T value, Stream stream)
-        {
-            var serializer = new XmlSerializer(typeof(T));
-            serializer.Serialize(stream, value);
         }
 
         /// <summary>
@@ -159,5 +149,16 @@ namespace Eqi.Core.Serialization.Impl
         }
 
         #endregion
+
+        /// <summary>
+        /// Serialize object to XML.
+        /// </summary>
+        /// <param name="value">Object instance.</param>
+        /// <param name="stream">Object stream.</param>
+        private void SerializeToXmlStream(object value, Stream stream)
+        {
+            var serializer = new XmlSerializer(value.GetType());
+            serializer.Serialize(stream, value);
+        }
     }
 }

@@ -45,14 +45,7 @@ namespace Eqi.Core.Serialization
         /// </summary>
         /// <param name="value">object instance.</param>
         /// <returns>Xml string.</returns>
-        string SerializeToXml<T>(T value);
-
-        /// <summary>
-        /// Serialize object to XML.
-        /// </summary>
-        /// <param name="value">Object instance.</param>
-        /// <param name="stream">Object stream.</param>
-        void SerializeToXmlStream<T>(T value, Stream stream);
+        string SerializeToXml(object value);
 
         /// <summary>
         /// Deserialize xml string to object.

@@ -112,8 +112,12 @@
   <ItemGroup>
     <Content Include="Configuration\test2.txt" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Configuration\Data\" />
+    <Content Include="Configuration\Data\Databases.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Data\DataCommand.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

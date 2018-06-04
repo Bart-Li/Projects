@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core", "Eqi.Core\Eqi.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core.WebCentral", "Eqi.Core.WebCentral\Eqi.Core.WebCentral.csproj", "{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqi.Core.BaseService", "Eqi.Core.BaseService\Eqi.Core.BaseService.csproj", "{71B91912-D7F0-46F0-8384-E959694C157C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA4DCAD3-8492-4DF5-A4BF-D5C287BB094A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71B91912-D7F0-46F0-8384-E959694C157C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71B91912-D7F0-46F0-8384-E959694C157C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71B91912-D7F0-46F0-8384-E959694C157C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71B91912-D7F0-46F0-8384-E959694C157C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
